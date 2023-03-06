@@ -80,9 +80,8 @@
                 </div>
             </div>
         </div>
-
-        {% if user.type=='guest' %}
-            <salla-login-modal></salla-login-modal>
-        {% endif %}
     </div>
 </header>
+{% if store.scope %}
+    <salla-scopes selection="{{ store.scope.display_as == 'popup' ? 'mandatory' : 'optional' }}"></salla-scopes>
+{% endif %}
