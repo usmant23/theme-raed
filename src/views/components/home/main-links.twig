@@ -25,7 +25,8 @@
               {% for link in component.links %}
                     <div class="swiper-slide slide--one-sixth">
                         <a href="{{ link.url }}" class="slide--cat-entry">
-                            <i class="{{ link.icon }}"></i>
+                            <i class="bg-cover {{ link.image ? '' : link.icon }}"
+                                style="{{ link.image ? 'background-image: url(' ~ link.image ~ ')' }}"></i>
                             <h4>{{ link.title }}</h4>
                         </a>
                     </div>
