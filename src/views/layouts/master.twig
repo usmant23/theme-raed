@@ -121,7 +121,19 @@
         window.imageZoom = "{{theme.settings.get('imageZoom')}}"
     </script>
     
-    {% hook 'head:start' %}
+    {# {% hook 'head:start' %} #}
+    <script data-cfasync="false">
+        window.salla = window.Salla = window.Salla || {};
+        Salla.onReady = Salla.onReady || function (callback) {
+          return new Promise(function(resolve){
+            return Salla.status == 'ready'
+            ? resolve(callback ? callback(salla.config.all()) : salla.config.all())
+            : window.addEventListener('twilight::initiated', function(config){ resolve(callback ? callback(config.detail) : config.detail)}, {once: true});
+          });
+        };
+     </script>
+  <script async src="https://cdn.salla.network/js/twilight/tests/hotfixPD-703-avoid-lost-apple-pay-trsnaction-for-network-errors/a9cfcf6d5c61cdbd9087dc4f3fa2cc94d54d5603/twilight.js"></script>
+
     {% hook head %}
     {% block styles %}{% endblock %}
     <link rel="stylesheet" href="{{ 'app.css' | asset }}">
